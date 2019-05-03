@@ -4,8 +4,9 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync(path.resolve('src', 'database', 'tasks_db.json'))
 const tasks_db = low(adapter)
 
+const shortid = require('shortid')
 // Controller geral de tarefas
-class TodoController {
+class TaskController {
   async index(req, res) {
     console.log('index')
     return res.json({page: 'index'})
@@ -16,8 +17,12 @@ class TodoController {
   }
 
   async store(req, res) {
-    const task = req.body
+		const task = {
+			id: shortid.generate(),
+			...req.body
+		}
 
+		tasks_db.get('tasks').push(task).write()
 		res.json(task)
   }
 
@@ -30,4 +35,4 @@ class TodoController {
   }
 }
 
-module.exports = new TodoController()
+module.exports = new TaskController()
