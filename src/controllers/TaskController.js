@@ -19,7 +19,8 @@ class TaskController {
   async store(req, res) {
 		const task = {
 			id: shortid.generate(),
-			...req.body
+			...req.body,
+			createdAt: new Date()
 		}
 
 		tasks_db.get('tasks').push(task).write()
