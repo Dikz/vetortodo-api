@@ -17,11 +17,11 @@ routes.use((req, res, next) => {
 
 //Rotas
 // * Todo
-routes.get('/todo', controllers.TaskController.index)
-routes.get('/todo/:id', controllers.TaskController.show)
-routes.post('/todo', controllers.TaskController.store)
-routes.put('/todo/:id', controllers.TaskController.update)
-routes.delete('/todo/:id', controllers.TaskController.destroy)
+routes.get('/tasks', controllers.TaskController.index)
+routes.get('/tasks/:id', controllers.TaskController.show)
+routes.post('/tasks', controllers.TaskController.store)
+routes.put('/tasks/:id', controllers.TaskController.update)
+routes.delete('/tasks/:id', controllers.TaskController.destroy)
 
 
 module.exports = routes
