@@ -13,8 +13,12 @@ tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
 // Controller geral de tarefas
 class TaskController {
   async index(req, res) {
-    console.log('index')
-    return res.json({page: 'index'})
+    const body = {
+			list: tasks_db.get('tasks'),
+			total: tasks_db.get('tasks').size().value()
+		}
+
+		res.json(body)
   }
 
   async show(req, res) {
