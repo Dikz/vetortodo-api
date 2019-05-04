@@ -15,7 +15,9 @@ class TaskController {
   }
 
   async show(req, res) {
-    return res.json({page: 'show'})
+		const task = await tasks_db.get('tasks').find({id: req.params.id}).value()
+
+		res.json(task)
   }
 
   async store(req, res) {
