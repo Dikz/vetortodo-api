@@ -7,6 +7,9 @@ const tasks_db = low(adapter)
 const shortid = require('shortid')
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#@');
 
+// Criando base das tasks
+tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
+
 // Controller geral de tarefas
 class TaskController {
   async index(req, res) {

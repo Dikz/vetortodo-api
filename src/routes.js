@@ -9,11 +9,12 @@ const adapter = new FileSync(path.resolve('src', 'database', 'tasks_db.json'))
 const tasks_db = low(adapter)
 
 //Middlewares
-routes.use((req, res, next) => {
-	tasks_db.set('tasks', []).write()
+/*
+	routes.use((req, res, next) => {
 
-	next()
-})
+		next()
+	})
+*/
 
 //Rotas
 // * Todo
