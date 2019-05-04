@@ -35,7 +35,11 @@ class TaskController {
   }
 
   async update(req, res) {
-    return res.json({page: 'update'})
+		const task = await tasks_db.get('tasks')
+			.find({id: req.params.id})
+			.assign({...req.body}).write()
+
+		res.json(task)
   }
 
   async destroy(req, res) {
