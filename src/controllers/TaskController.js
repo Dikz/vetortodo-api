@@ -39,7 +39,8 @@ class TaskController {
   }
 
   async destroy(req, res) {
-    return res.json({page: 'destroy'})
+		await tasks_db.get('tasks').remove({id: req.params.id}).write()
+		return res.send()
   }
 }
 
