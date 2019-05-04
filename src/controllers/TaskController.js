@@ -5,6 +5,8 @@ const adapter = new FileSync(path.resolve('src', 'database', 'tasks_db.json'))
 const tasks_db = low(adapter)
 
 const shortid = require('shortid')
+shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#@');
+
 // Controller geral de tarefas
 class TaskController {
   async index(req, res) {
