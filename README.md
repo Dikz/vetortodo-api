@@ -1,8 +1,8 @@
 # Vetor TODO API
 > Aplicação / API de tarefas da Vetor
 
-
-## Instalação
+## Para desenvolvedores
+> ## Clone & Instalação
 > Antes de baixar e instalar, certifique-se de que tem o git e node instalados.
 > Após instalados pode seguir com os passos abaixo no seu terminal:
 
@@ -14,7 +14,7 @@ npm start
 ```
 
 
-## Após iniciar
+> ## Após iniciar
 > A rota principal é: http://localhost:3080/api/tasks
 #### Metodos:
 * **[GET]** ➡️ _/tasks_ - Lista todas as tarefas
