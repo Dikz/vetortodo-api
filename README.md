@@ -12,3 +12,13 @@ cd vetortodo-api
 npm install
 npm start
 ```
+
+
+## Após iniciar
+> A rota principal é: http://localhost:3080/api/tasks
+#### Metodos:
+* **[GET]** ➡️ _/tasks_ - Lista todas as tarefas
+* **[GET]** ➡️ _/tasks/{id}_ - Mostra uma tarefa
+* **[POST]** ➡️ _/tasks_ - Cria uma nova tarefa
+* **[PUT]** ➡️ _/tasks/{id}_ - Edita uma tarefa
+* **[DELETE]** ➡️ _/tasks/{id}_ - Apaga uma tarefa
