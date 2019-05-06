@@ -22,7 +22,7 @@ class TaskValidator {
 		if (!result) {
 			return {
 				invalidFields: invalidFields,
-				validate: result
+				result: result
 			}
 		} else {
 			return {
