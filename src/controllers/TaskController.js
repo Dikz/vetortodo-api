@@ -8,6 +8,7 @@ const shortid = require('shortid')
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#@');
 
 const paginate = require('paginate-array')
+const TaskValidator = require('../validators/TaskValidator')
 
 // Criando base das tasks
 tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
@@ -35,8 +36,17 @@ class TaskController {
 			createdAt: new Date()
 		}
 
-		tasks_db.get('tasks').push(task).write()
-		res.json(task)
+		let validate = TaskValidator.validate(req.body)
+
+		if (validate.result) {
+			tasks_db.get('tasks').push(task).write()
+			task.validate = validate
+			res.json(task)
+		} else {
+			res.json(validate)
+		}
+
+
   }
 
   async update(req, res) {
