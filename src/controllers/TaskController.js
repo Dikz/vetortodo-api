@@ -7,18 +7,19 @@ const tasks_db = low(adapter)
 const shortid = require('shortid')
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#@');
 
+const paginate = require('paginate-array')
+
 // Criando base das tasks
 tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
 
 // Controller geral de tarefas
 class TaskController {
   async index(req, res) {
-    const body = {
-			list: tasks_db.get('tasks'),
-			total: tasks_db.get('tasks').size().value()
-		}
+		const page = req.query.page || 1
+		const tasks = tasks_db.get('tasks')
+		const paginated = await paginate(Array.from(tasks), page)
 
-		res.json(body)
+		res.json(paginated)
   }
 
   async show(req, res) {
