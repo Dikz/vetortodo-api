@@ -36,12 +36,15 @@ class TaskController {
 			createdAt: new Date()
 		}
 
-		let validate = TaskValidator.validate(req.body)
+		let validate = await TaskValidator.validate(req.body)
 
 		if (validate.result) {
 			tasks_db.get('tasks').push(task).write()
-			task.validate = validate
-			res.json(task)
+			//task.validate = validate
+
+			let response = task
+			response.validate = validate
+			res.json(response)
 		} else {
 			res.json(validate)
 		}
