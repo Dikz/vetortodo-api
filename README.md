@@ -1,5 +1,6 @@
 # Vetor TODO API
 > Aplicação / API de tarefas da Vetor
+> **[ Usa lowdb para armazenar os dados em um banco de dados JSON. A aplicação liga a API, e fornece um log de uso e funcionamento.]**
 
 ## Para desenvolvedores
 > ## Clone & Instalação
