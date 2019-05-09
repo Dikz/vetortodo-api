@@ -17,7 +17,7 @@ tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
 class TaskController {
   async index(req, res) {
 		const page = req.query.page || 1
-		const tasks = tasks_db.get('tasks')
+		const tasks = tasks_db.get('tasks').orderBy('createdAt', 'desc')
 		const paginated = await paginate(Array.from(tasks), page)
 
 		res.json(paginated)
