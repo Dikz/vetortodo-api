@@ -17,7 +17,15 @@ tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
 class TaskController {
   async index(req, res) {
 		const page = req.query.page || 1
-		const tasks = tasks_db.get('tasks').orderBy('createdAt', 'desc')
+		let tasks = []
+
+		if (req.query.status) {
+			tasks = await tasks_db.get('tasks').filter({status: req.query.status}).orderBy('createdAt', 'desc')
+		} else {
+			tasks = await tasks_db.get('tasks').orderBy('createdAt', 'desc').orderBy('status', 'desc')
+		}
+
+		// Paginação
 		const paginated = await paginate(Array.from(tasks), page)
 
 		res.json(paginated)
@@ -33,7 +41,8 @@ class TaskController {
 		const task = {
 			id: shortid.generate(),
 			...req.body,
-			createdAt: new Date()
+			createdAt: new Date(),
+			status: req.body.status || 'pending'
 		}
 
 		let validate = await TaskValidator.validate(req.body)
