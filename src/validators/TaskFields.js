@@ -3,6 +3,7 @@ module.exports = {
 		'name',
 		'description',
 		'amount',
-		'datelimit'
+		'datelimit',
+		'status'
 	]
 }
