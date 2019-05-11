@@ -14,6 +14,12 @@ class App {
 		this.express.use(express.json())
 		this.express.use(cors())
 
+		this.express.use((req, res, next) => {
+			this.express.set('io', this.io)
+
+			next()
+		})
+
 		this.express.use('/api', require('./src/routes'))
 
 		require('./src/realtime/Main').init(this.io)
