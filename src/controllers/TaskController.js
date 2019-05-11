@@ -13,6 +13,8 @@ const TaskValidator = require('../validators/TaskValidator')
 // Criando base das tasks
 tasks_db.has('tasks').value() ? '' : tasks_db.set('tasks', []).write()
 
+const TaskEvents = require('../realtime/events/TaskEvents')
+
 // Controller geral de tarefas
 class TaskController {
   async index(req, res) {
@@ -53,6 +55,9 @@ class TaskController {
 
 			let response = task
 			response.validate = validate
+
+			TaskEvents.afterCreate(req.app.get('io'), task)
+
 			res.json(response)
 		} else {
 			res.json(validate)
@@ -66,11 +71,15 @@ class TaskController {
 			.find({id: req.params.id})
 			.assign({...req.body}).write()
 
+		TaskEvents.afterUpdate(req.app.get('io'), task)
+
 		res.json(task)
   }
 
   async destroy(req, res) {
-		await tasks_db.get('tasks').remove({id: req.params.id}).write()
+		TaskEvents.afterDelete(req.app.get('io'), '')
+
+		tasks_db.get('tasks').remove({id: req.params.id}).write()
 		return res.send()
   }
 }
