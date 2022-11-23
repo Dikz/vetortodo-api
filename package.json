@@ -17,6 +17,6 @@
     "paginate-array": "^2.1.0",
     "require-dir": "^1.2.0",
     "shortid": "^2.2.14",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.5.0"
   }
 }
